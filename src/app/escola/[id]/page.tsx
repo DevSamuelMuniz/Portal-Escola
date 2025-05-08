@@ -54,26 +54,29 @@ export default function DetalhesEscola() {
         "https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-shadow.png",
     });
   }, []);
-  const fetchEscolas = async () => {
-    try {
-      const response = await axios.get(
-        "https://corsproxy.io/?https://dados.recife.pe.gov.br/api/3/action/datastore_search",
-        {
-          params: {
-            resource_id: "7c613836-9edd-4c0f-bc72-495008dd29c3",
-          },
-        }
-      );
-      const registros: Escola[] = response.data.result.records;
-      const encontrada = registros.find((item) => item.rpa.toString() === id);
-      setEscola(encontrada || null);
-    } catch (error) {
-      console.error("Erro ao buscar os dados:", error);
-    }
-  };
 
   useEffect(() => {
-    fetchEscolas();
+    const fetchEscola = async () => {
+      try {
+        const response = await axios.get(
+          "https://dados.recife.pe.gov.br/api/3/action/datastore_search",
+          {
+            params: {
+              resource_id: "7c613836-9edd-4c0f-bc72-495008dd29c3",
+              limit: 1000,
+            },
+          }
+        );
+
+        const registros: Escola[] = response.data.result.records;
+        const encontrada = registros.find((item) => item.rpa.toString() === id);
+        setEscola(encontrada || null);
+      } catch (error) {
+        console.error("Erro ao buscar os dados:", error);
+      }
+    };
+
+    fetchEscola();
   }, [id]);
 
   if (!escola) {
