@@ -41,7 +41,7 @@ export default function Home() {
   const fetchEscolas = async () => {
     try {
       const response = await axios.get(
-        "http://dados.recife.pe.gov.br/api/3/action/datastore_search",
+        "https://dados.recife.pe.gov.br/api/3/action/datastore_search",
         {
           params: {
             resource_id: "7c613836-9edd-4c0f-bc72-495008dd29c3",
