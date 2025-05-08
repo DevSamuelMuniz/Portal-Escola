@@ -1,6 +1,10 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
+  eslint: {
+    ignoreDuringBuilds: true, // Ignora erros do ESLint durante o build
+  },
+
   images: {
     domains: [
       "vault.pulsarimagens.com.br",

@@ -3,7 +3,6 @@
 import { useEffect, useState } from "react";
 import { useParams, useRouter } from "next/navigation";
 import axios from "axios";
-import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
 import L from "leaflet";
 import "leaflet/dist/leaflet.css";
 
@@ -42,11 +41,9 @@ interface Escola {
 
 export default function DetalhesEscola() {
   const { id } = useParams();
-  const router = useRouter();
   const [escola, setEscola] = useState<Escola | null>(null);
 
   useEffect(() => {
-    // ⚠️ Só roda no cliente
     delete (L.Icon.Default.prototype as any)._getIconUrl;
     L.Icon.Default.mergeOptions({
       iconRetinaUrl:
