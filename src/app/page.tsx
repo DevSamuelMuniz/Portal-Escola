@@ -58,6 +58,7 @@ export default function Home() {
     fetchEscolas();
   }, []);
 
+  
   const escolasFiltradas = escolas.filter((escola) => {
     const nomeMatch = escola.escola
       .toLowerCase()
